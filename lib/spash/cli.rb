@@ -23,6 +23,13 @@ module Spash
       puts 'auth token saved.'
     end
 
+    desc 'open', 'open browser as signed in user'
+    def open
+      api = Spash::API.new
+      result = api.open
+      puts result
+    end
+
     desc 'debug info', 'Debug'
     def debug_info
       api = Spash::API.new

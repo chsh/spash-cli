@@ -34,6 +34,11 @@ module Spash
                    'Authorization' => "Bearer #{auth_token}")
     end
 
+    def open
+      server = config['server'].gsub(/\/+\z/, '')
+      `open #{server}/api/sessions/start?token=#{auth_token}`
+    end
+
     def debug_info
       { config: config }
     end
