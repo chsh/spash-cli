@@ -12,22 +12,22 @@ module Spash
 
     def create(text = nil)
       if text.nil?
-        raise "no stdin input" unless STDIN.tty?
+        raise "no stdin input" if STDIN.tty?
         text = $stdin.read
       end
-      send_params = { title: text }
+      send_params = { text: text }
       server = config['server'].gsub(/\/+\z/, '')
       Faraday.post("#{server}/api/conversations", send_params.to_json,
                    'Content-Type' => 'application/json',
                    'Authorization' => "Bearer #{auth_token}")
     end
 
-    def comment_create(slug, text = nil)
+    def create_comment(slug, text = nil)
       if text.nil?
-        raise "no stdin input" unless STDIN.tty?
+        raise "no stdin input" if STDIN.tty?
         text = $stdin.read
       end
-      send_params = { body: text }
+      send_params = { text: text }
       server = (config['server'] || 'https://spash.to').gsub(/\/+\z/, '')
       Faraday.post("#{server}/api/conversations/#{slug}/comments", send_params.to_json,
                    'Content-Type' => 'application/json',
