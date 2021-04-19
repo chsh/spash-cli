@@ -14,7 +14,9 @@ module Spash
 
     desc 'add file or stdin to spash.', 'Add file or stdin to spash page.'
     def add(spash, file_or_stdin = nil)
-      puts "spash=#{spash}, file=#{file_or_stdin}"
+      api = Spash::API.new
+      result = api.create_comment(spash, file_or_stdin)
+      puts result
     end
 
     desc 'auth', 'Authenticate spash.'
