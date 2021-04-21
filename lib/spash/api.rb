@@ -36,7 +36,8 @@ module Spash
 
     def open
       server = config['server'].gsub(/\/+\z/, '')
-      `open #{server}/api/sessions/start?token=#{auth_token}`
+      cmd = "open #{server}/api/sessions/start?key=#{auth_token}"
+      `#{cmd}`
     end
 
     def debug_info
